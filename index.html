@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vostn AI — AI Automation for Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --cream: #f4f1eb;
+    --accent: #2a5caa;
+    --accent-light: #e8eef9;
+    --gray: #6b6b6b;
+    --gray-light: #e8e8e4;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 5vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .logo { font-family: var(--serif); font-size: 1.4rem; letter-spacing: -0.01em; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--black); }
+  .btn-primary {
+    background: var(--black); color: var(--white);
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--black);
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    border: 1.5px solid var(--black);
+    text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--black); color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 5vw 5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 800px;
+    margin-bottom: 1.75rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--gray); max-width: 520px;
+    margin-bottom: 2.5rem; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-cta .btn-primary { font-size: 1rem; padding: 0.85rem 2rem; }
+  .hero-cta .btn-secondary { font-size: 1rem; padding: 0.85rem 2rem; }
+  .hero-note { font-size: 0.8rem; color: var(--gray); margin-top: 1rem; }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    background: var(--cream);
+    padding: 1.5rem 5vw;
+    display: flex; align-items: center; gap: 3rem;
+    overflow: hidden;
+  }
+  .proof-bar-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
+  .proof-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+  .proof-stat strong { font-family: var(--serif); font-size: 1.5rem; display: block; }
+  .proof-stat span { font-size: 0.8rem; color: var(--gray); }
+
+  /* SECTIONS */
+  section { padding: 6rem 5vw; max-width: 1100px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding: 6rem 5vw; }
+  .section-full > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.15; letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .section-sub { font-size: 1.05rem; color: var(--gray); max-width: 520px; margin-bottom: 3rem; }
+
+  /* HOW IT WORKS */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .step {
+    padding: 2rem;
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .step:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .step-num {
+    font-family: var(--serif); font-size: 2.5rem; color: var(--accent-light);
+    line-height: 1; margin-bottom: 1rem;
+    -webkit-text-stroke: 1.5px var(--accent);
+    color: transparent;
+  }
+  .step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.9rem; color: var(--gray); }
+
+  /* FEATURES */
+  .features-bg { background: var(--cream); }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .feature-card {
+    background: var(--white); padding: 1.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-light);
+  }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .feature-card h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testimonial {
+    padding: 2rem; border: 1px solid var(--gray-light); border-radius: 12px;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"'; font-family: var(--serif); font-size: 4rem;
+    color: var(--accent-light); position: absolute; top: 0.5rem; left: 1.25rem;
+    line-height: 1;
+  }
+  .testimonial p { font-size: 0.95rem; color: var(--black); line-height: 1.7; margin-bottom: 1.25rem; padding-top: 1.5rem; }
+  .testimonial-author { display: flex; flex-direction: column; }
+  .testimonial-author strong { font-size: 0.875rem; font-weight: 500; }
+  .testimonial-author span { font-size: 0.8rem; color: var(--gray); }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .pricing-card {
+    padding: 2.5rem; border: 1px solid var(--gray-light); border-radius: 16px;
+    display: flex; flex-direction: column;
+  }
+  .pricing-card.featured {
+    background: var(--black); color: var(--white);
+    border-color: var(--black);
+  }
+  .pricing-card.featured .price-sub,
+  .pricing-card.featured .pricing-feature { color: #aaa; }
+  .pricing-card.featured .pricing-divider { border-color: #333; }
+  .pricing-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 1rem; color: var(--accent); }
+  .pricing-card.featured .pricing-label { color: #88aadd; }
+  .price { font-family: var(--serif); font-size: 3rem; line-height: 1; margin-bottom: 0.25rem; }
+  .price-sub { font-size: 0.85rem; color: var(--gray); margin-bottom: 1.5rem; }
+  .pricing-divider { border: none; border-top: 1px solid var(--gray-light); margin: 1.5rem 0; }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; margin-bottom: 2rem; }
+  .pricing-feature { font-size: 0.875rem; display: flex; gap: 0.6rem; align-items: flex-start; }
+  .pricing-feature::before { content: '—'; color: var(--accent); flex-shrink: 0; }
+  .pricing-card.featured .btn-primary { background: var(--white); color: var(--black); }
+  .pricing-card.featured .btn-primary:hover { background: var(--accent-light); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--black); color: var(--white); }
+  .contact-bg h2 { color: var(--white); }
+  .contact-bg .section-label { color: #88aadd; }
+  .contact-bg .section-sub { color: #aaa; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; max-width: 540px; margin-top: 2.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; color: #aaa; font-weight: 400; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: #1a1a1a; border: 1px solid #333; color: var(--white);
+    padding: 0.75rem 1rem; border-radius: 8px; font-family: var(--sans);
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: #1a1a1a; }
+  .contact-bg .btn-primary { background: var(--white); color: var(--black); align-self: flex-start; font-size: 0.95rem; padding: 0.85rem 2rem; }
+  .contact-bg .btn-primary:hover { background: var(--accent-light); color: var(--black); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 5vw; border-top: 1px solid var(--gray-light);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.8rem; color: var(--gray);
+  }
+  footer a { color: var(--gray); text-decoration: none; }
+  footer a:hover { color: var(--black); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .proof-stats { gap: 1.5rem; }
+    .hero-cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* DEMO CALL BADGE */
+  .demo-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent-light); color: var(--accent);
+    padding: 0.4rem 1rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500; margin-bottom: 1.5rem;
+    border: 1px solid #c5d5f0;
+    opacity: 0; animation: fadeUp 0.6s 0s forwards;
+  }
+  .demo-badge::before { content: '●'; color: #4caf50; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Vostn <span>AI</span></div>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Results</a>
+    <a href="tel:+61485007800" class="btn-primary">Call us now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1100px;margin:0 auto;">
+  <section class="hero">
+    <div class="demo-badge">Live demo — call +61 485 007 800</div>
+    <p class="hero-eyebrow">AI Automation for Small Business</p>
+    <h1>Never miss a lead.<br><em>Ever again.</em></h1>
+    <p class="hero-sub">Vostn AI answers your calls 24/7, qualifies leads, and books appointments directly into your calendar — while you focus on running your business.</p>
+    <div class="hero-cta">
+      <a href="tel:+61485007800" class="btn-primary">Talk to Kylie now →</a>
+      <a href="#contact" class="btn-secondary">Book a strategy call</a>
+    </div>
+    <p class="hero-note">No setup required on your end. Live in 3 days.</p>
+  </section>
+</div>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <span class="proof-bar-label">By the numbers</span>
+  <div class="proof-stats">
+    <div class="proof-stat reveal"><strong>24/7</strong><span>Call answering</span></div>
+    <div class="proof-stat reveal"><strong>3 days</strong><span>To go live</span></div>
+    <div class="proof-stat reveal"><strong>0</strong><span>Missed leads</span></div>
+    <div class="proof-stat reveal"><strong>$0</strong><span>Setup fee this month</span></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <p class="section-label reveal">Process</p>
+  <h2 class="reveal">Up and running<br>in three steps</h2>
+  <p class="section-sub reveal">We handle everything. You just take the calls that matter.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Strategy call</h3>
+      <p>We map out your business, understand your booking process, and identify where you're losing leads.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>We build it</h3>
+      <p>Your AI receptionist is configured, trained on your business, and connected to your calendar in 3 days.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>You go live</h3>
+      <p>Forward your number, and every call is answered instantly. Bookings flow straight into your calendar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="section-full features-bg">
+  <section id="features" style="max-width:1100px;margin:0 auto;padding:6rem 0;">
+    <p class="section-label reveal">What you get</p>
+    <h2 class="reveal">Everything your front desk does.<br>At a fraction of the cost.</h2>
+    <div class="features-grid" style="margin-top:3rem;">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📞</div>
+        <h3>AI Voice Receptionist</h3>
+        <p>Answers every call instantly, qualifies the lead, and handles common questions — just like a human.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📅</div>
+        <h3>Automatic Booking</h3>
+        <p>Books, reschedules, and cancels appointments directly into your Google Calendar without any manual work.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">💬</div>
+        <h3>SMS Follow-up</h3>
+        <p>Missed calls get an instant text back. Every booked client receives a confirmation and reminder SMS.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Lead Dashboard</h3>
+        <p>Every call logged with transcript and summary. See who called, what they wanted, and whether they booked.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔔</div>
+        <h3>Appointment Reminders</h3>
+        <p>Automated SMS reminders sent 24 hours before every appointment to reduce no-shows.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Live in 3 Days</h3>
+        <p>No lengthy onboarding. We configure everything and hand you a phone number ready to forward calls to.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label reveal">Results</p>
+  <h2 class="reveal">What business owners say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <p>We were missing calls every weekend. Now every enquiry gets answered and booked automatically. We haven't lost a lead since.</p>
+      <div class="testimonial-author">
+        <strong>Sarah M.</strong>
+        <span>Beauty Salon Owner, Sydney</span>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <p>I was sceptical at first but the AI handles the calls better than I expected. It books clients and sends them reminders without me doing anything.</p>
+      <div class="testimonial-author">
+        <strong>James T.</strong>
+        <span>Trades Business Owner, Melbourne</span>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <p>The strategy session alone was worth it. They showed me exactly how many leads I was losing. The system paid for itself in the first week.</p>
+      <div class="testimonial-author">
+        <strong>Priya K.</strong>
+        <span>Clinic Owner, Brisbane</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--cream);max-width:100%;padding:6rem 5vw;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label reveal">Pricing</p>
+    <h2 class="reveal">Simple, transparent pricing</h2>
+    <p class="section-sub reveal">No lock-in contracts. Cancel anytime.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-label">Starter</div>
+        <div class="price">$297</div>
+        <div class="price-sub">per month</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">AI voice receptionist</li>
+          <li class="pricing-feature">Appointment booking & reminders</li>
+          <li class="pricing-feature">SMS confirmations</li>
+          <li class="pricing-feature">Lead dashboard</li>
+          <li class="pricing-feature">Up to 200 calls/month</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-label">Growth</div>
+        <div class="price">$497</div>
+        <div class="price-sub">per month — most popular</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">Everything in Starter</li>
+          <li class="pricing-feature">Missed call text back</li>
+          <li class="pricing-feature">Lead reengagement automation</li>
+          <li class="pricing-feature">Post-call follow up</li>
+          <li class="pricing-feature">Up to 500 calls/month</li>
+          <li class="pricing-feature">Monthly performance report</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Get started</a>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-label">Scale</div>
+        <div class="price">$797</div>
+        <div class="price-sub">per month</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature">Everything in Growth</li>
+          <li class="pricing-feature">Outbound prospecting calls</li>
+          <li class="pricing-feature">Review request automation</li>
+          <li class="pricing-feature">Custom integrations</li>
+          <li class="pricing-feature">Unlimited calls</li>
+          <li class="pricing-feature">Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="section-full contact-bg">
+  <section id="contact" style="max-width:1100px;margin:0 auto;padding:6rem 0;">
+    <p class="section-label">Book a strategy call</p>
+    <h2>Let's map out your<br>automation plan</h2>
+    <p class="section-sub">Free 30-minute session. We'll show you exactly where you're losing leads and how to fix it.</p>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First name</label>
+          <input type="text" placeholder="Jason" required>
+        </div>
+        <div class="form-group">
+          <label>Last name</label>
+          <input type="text" placeholder="Smith" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone number</label>
+        <input type="tel" placeholder="+61 4XX XXX XXX" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@business.com" required>
+      </div>
+      <div class="form-group">
+        <label>Business type</label>
+        <select required>
+          <option value="" disabled selected>Select your industry</option>
+          <option>Hair & Beauty</option>
+          <option>Health & Wellness</option>
+          <option>Trades & Services</option>
+          <option>Real Estate</option>
+          <option>Legal & Professional</option>
+          <option>Retail</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>What's your biggest challenge right now?</label>
+        <textarea placeholder="e.g. Missing calls after hours, slow lead follow-up..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary">Book my free strategy call →</button>
+    </form>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Vostn <span style="color:var(--accent);font-family:var(--serif);font-style:italic;">AI</span></div>
+  <div style="display:flex;gap:2rem;">
+    <a href="mailto:admin@vostn.ai">admin@vostn.ai</a>
+    <a href="tel:+61485007800">+61 485 007 800</a>
+  </div>
+  <div>© 2026 Vostn AI. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Submitted! We\'ll be in touch shortly.';
+    btn.style.background = '#2a5caa';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
